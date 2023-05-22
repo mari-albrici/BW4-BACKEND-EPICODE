@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 
+import entities.enums.Periodicità;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
