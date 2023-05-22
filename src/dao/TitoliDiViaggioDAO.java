@@ -22,7 +22,7 @@ public class TitoliDiViaggioDAO {
 		transaction.begin();
 		em.persist(tv);
 		transaction.commit(); 
-		System.out.println("Titolo creato!");
+		System.out.println("Titolo di viaggio creato!");
 	}
 	
 	public boolean checkValiditaAbbonamento(UUID numeroTessera) {
