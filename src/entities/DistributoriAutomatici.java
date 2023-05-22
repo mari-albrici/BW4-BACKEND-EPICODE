@@ -16,8 +16,8 @@ public class DistributoriAutomatici extends PuntiVendita{
 	@Enumerated(EnumType.STRING)
 	private Stato stato;
 
-	public DistributoriAutomatici(String indirizzo, boolean is_distributore, Stato stato) {
-		super(indirizzo, is_distributore);
+	public DistributoriAutomatici(String indirizzo, Stato stato) {
+		super(indirizzo);
 		this.stato = stato;
 	}
 

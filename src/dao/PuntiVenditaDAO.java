@@ -19,7 +19,7 @@ public class PuntiVenditaDAO {
 		transaction.begin();//partono le operazioni che voglio fare nel database
 		em.persist(n);//salvera nel database cio che passo
 		transaction.commit();//termina la transazione ed effettua il flush del oggetto
-		System.out.println("Evento salvato");
+		System.out.println("Punto vendita aggiunto correttamente");
 	}
 
 	public PuntiVendita getById(String id) {
@@ -34,7 +34,7 @@ public class PuntiVenditaDAO {
 			transaction.begin();
 			em.remove(found);
 			transaction.commit();
-			System.out.println("Evento con id " + id + " eliminato!");
+			System.out.println("Punto vendita con id " + id + " eliminato!");
 		}else {
 			System.out.println("id non trovato");
 		}
