@@ -92,26 +92,7 @@ public class TesseraDAO {
 
 	}
 
-	public static void refresh(Tessera a) {
 
-		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
-		EntityManager em = emf.createEntityManager();
-
-		try {
-
-			em.refresh(a);
-
-		} catch (Exception ex) {
-
-			logger.error("Error", ex);
-			throw ex;
-
-		} finally {
-
-			em.close();
-		}
-
-	}
 
 
 

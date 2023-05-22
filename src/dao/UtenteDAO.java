@@ -92,26 +92,7 @@ public class UtenteDAO {
 
 	}
 
-	public static void refresh(Utente a) {
 
-		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
-		EntityManager em = emf.createEntityManager();
-
-		try {
-
-			em.refresh(a);
-
-		} catch (Exception ex) {
-
-			logger.error("Error", ex);
-			throw ex;
-
-		} finally {
-
-			em.close();
-		}
-
-	}
 
 	public static void collegaTessera(int idUtente, Tessera tess) {
 
