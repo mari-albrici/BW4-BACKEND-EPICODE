@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,8 @@ public class Abbonamento extends TitoliDiViaggio{
 	@Enumerated(EnumType.STRING)
 	private Periodicità periodicità;
 	private LocalDate dataScadenza; 
+	
+	@OneToOne
 	private long numeroTessera;
 	
 
