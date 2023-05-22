@@ -27,17 +27,19 @@ public abstract class PuntiVendita {
 	@GeneratedValue
 	private UUID id;
 	private String indirizzo;
+	private Integer numeroVendite;
 	
 	//@OneToMany(mappedBy = punti_vendita) 
-	//public TitoliDiViaggio titoli_di_viaggio;
+	//public List<TitoliDiViaggio> titoli_di_viaggio;
 	
 	public PuntiVendita(String indirizzo) {
 		super();
 		this.indirizzo = indirizzo;
+		this.numeroVendite = numeroVendite;
 	}
 
 	@Override
 	public String toString() {
-		return "PuntiVendita [indirizzo=" + indirizzo + "]";
+		return "PuntiVendita [indirizzo=" + indirizzo + ", numeroVendite=" + numeroVendite + "]";
 	}
 }

@@ -25,9 +25,9 @@ public class Application {
 		
 		RivenditoriAutorizzati primoRiv = new RivenditoriAutorizzati("via Agrippa");
 		
-		da.save(primoDis);
-		da.save(secondoDis);
-		ra.save(primoRiv);
+		//da.save(primoDis);
+		//da.save(secondoDis);
+		//ra.save(primoRiv);
 		
 		em.close();
 		emf.close();
