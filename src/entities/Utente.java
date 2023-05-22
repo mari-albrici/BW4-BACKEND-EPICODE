@@ -1,69 +1,35 @@
 package entities;
-import entities.Tessera;
-import javax.persistence.*;
-@Entity
-@Table (name= "utenti")
-@NamedQuery(name="utenti.findAll", query = "SELECT e FROM Utente e")
-@NamedQuery(name="utenti.findId", query = "SELECT e FROM Utente e WHERE e.id = :id")
-@NamedQuery(name="utenti.findTessera", query = "SELECT e FROM Utente e WHERE tessera_utente = :tessera")
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@Entity
 public class Utente {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	private int id;
 	
-	
-	@OneToOne
-	@JoinColumn(name= "tessera_utente", unique= true)
-	private Tessera tessera;
-	
-	@Column(nullable = false)
 	private String nome;
 	
-	@Column(nullable = false)
 	private String cognome;
 	
-	public Utente () {}
-
-	public Utente(Tessera tessera, String nome, String cognome) {
-		super();
-		this.tessera = tessera;
-		this.nome = nome;
-		this.cognome = cognome;
-	}
+	@OneToOne
+	private Tessera tessera;
 	
-	public Long getId() {
-		return id;
-	}
-	
-	public Tessera getTessera() {
-		return tessera;
-	}
-
-	public void setTessera(Tessera numero_tessera) {
-		this.tessera = numero_tessera;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-	
-	@Override
-	public String toString() {
-		return "Utente [getId()=" + getId() + ", getTessera()=" + getTessera() + ", getNome()=" + getNome()
-				+ ", getCognome()=" + getCognome() + "]";
-	}
 }
