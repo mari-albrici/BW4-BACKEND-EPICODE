@@ -1,5 +1,33 @@
 package entities;
 
-public class TitoliDiViaggio {
+import java.time.LocalDate;
+import java.util.UUID;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "titoli_viagio")
+@Getter
+@Setter
+@NoArgsConstructor
+public abstract class TitoliDiViaggio {
+
+	@Id
+	@GeneratedValue
+	private UUID id;
+	
+	private LocalDate dataEmissione;
+	private boolean convalidato;
+	
+	public TitoliDiViaggio(LocalDate dataEmissione, boolean convalidato) {
+		this.dataEmissione = dataEmissione;
+		this.convalidato = convalidato;
+	}
 }
