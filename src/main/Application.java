@@ -3,6 +3,8 @@ package main;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+
+
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Logger;
@@ -18,4 +20,5 @@ public class Application {
 		
 		EntityManager em = emf.createEntityManager();
 	}
+
 }
