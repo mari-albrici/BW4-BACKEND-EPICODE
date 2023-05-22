@@ -10,7 +10,7 @@ public class JPAUtil {
 	    static {
 	        try {
 	            entityManagerFactory = Persistence
-	                    .createEntityManagerFactory("catalogo_bibliografico");
+	                    .createEntityManagerFactory("societa_trasporti");
 	        } catch (Throwable ex) {
 	            System.err.println("Initial EntityManagerFactory creation failed."
 	                    + ex);
