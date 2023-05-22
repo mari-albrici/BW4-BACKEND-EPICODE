@@ -1,26 +1,50 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
+
+import entities.Tessera;
 
 @Entity
-@NamedQuery(name = "Utente.findAll", query = "SELECT a FROM Utente a")
+@Table(name = "utenti")
+@NamedQuery(name="utenti.findAll", query = "SELECT e FROM Utente e")
+@NamedQuery(name="utenti.findId", query = "SELECT e FROM Utente e WHERE e.id = :id")
+@NamedQuery(name="utenti.findTessera", query = "SELECT e FROM Utente e WHERE tessera_utente = :tessera")
 public class Utente {
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	
+	@OneToOne
+	@JoinColumn(name= "tessera_utente", unique= true)
+	private Tessera tessera;
+	
+	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
 	private String cognome;
+	
+	public Utente () {}
 
-	public Integer getId() {
+	public Utente(Tessera tessera, String nome, String cognome) {
+		super();
+		this.tessera = tessera;
+		this.nome = nome;
+		this.cognome = cognome;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public Tessera getTessera() {
+		return tessera;
+	}
+
+	public void setTessera(Tessera numero_tessera) {
+		this.tessera = numero_tessera;
 	}
 
 	public String getNome() {
@@ -39,21 +63,16 @@ public class Utente {
 		this.cognome = cognome;
 	}
 
-	public Utente(String nome, String cognome) {
-		super();
-		this.nome = nome;
-		this.cognome = cognome;
-	}
-
 	@Override
 	public String toString() {
-		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome + "]";
+		return "Utente [getId()=" + getId() + ", getTessera()=" + getTessera() + ", getNome()=" + getNome()
+				+ ", getCognome()=" + getCognome() + "]";
 	}
-
-	public Utente() {
-		super();
-	}
-
 
 	
+
+	
+	
+	
+
 }
