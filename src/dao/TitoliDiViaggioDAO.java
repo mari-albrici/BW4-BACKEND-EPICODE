@@ -46,6 +46,10 @@ public class TitoliDiViaggioDAO {
 		transaction.commit();
 		em.close();
 		return results;
+		
+	}
+	
+	
 	public Biglietto getById(String id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
