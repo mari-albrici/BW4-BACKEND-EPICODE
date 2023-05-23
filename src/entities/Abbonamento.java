@@ -16,17 +16,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Abbonamento extends TitoliDiViaggio{
-	
+public class Abbonamento extends TitoliDiViaggio {
+
 	@Enumerated(EnumType.STRING)
 	private Periodicità periodicità;
-	private LocalDate dataScadenza; 
-	
-	@OneToOne
-	private long numeroTessera;
-	
+	private LocalDate dataScadenza;
 
-	public Abbonamento(LocalDate dataEmissione, boolean convalidato, Periodicità periodicità, LocalDate dataScadenza, long numeroTessera) {
+	@OneToOne
+	// ERRORE DIRLO AGLI ALTRI
+	private Tessera numeroTessera;
+
+	public Abbonamento(LocalDate dataEmissione, boolean convalidato, Periodicità periodicità, LocalDate dataScadenza,
+			Tessera numeroTessera) {
 		super(dataEmissione, convalidato);
 		this.periodicità = periodicità;
 		this.dataScadenza = dataScadenza;
