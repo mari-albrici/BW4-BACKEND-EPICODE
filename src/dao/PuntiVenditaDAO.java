@@ -5,7 +5,7 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-
+import javax.persistence.Query;
 import entities.PuntiVendita;
 
 public class PuntiVenditaDAO {
@@ -45,6 +45,20 @@ public class PuntiVenditaDAO {
 		}else {
 			System.out.println("id non trovato");
 		}
+		em.close();
+	}
+	
+	public void getTicketsBySalesPoint(String id) {
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("SELECT COUNT(*) FROM TitoliDiViaggio t WHERE t.puntoVendita = :puntoVendita");
+		
+		PuntiVendita selezionato = this.getById(id);
+		
+		q.setParameter("puntoVendita", selezionato);
+		
+		long totalTickets =  (long) q.getSingleResult();
+		
+		System.out.println("Il numero di biglietti venduto nel punto vendita selezionato è: " + totalTickets);
 		em.close();
 	}
 }

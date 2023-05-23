@@ -82,7 +82,9 @@ public class Application {
 //		System.out.println(mezzoUno.getPeriodoServizio());
 		
 		
-		tvd.checkValiditaAbbonamento(tesseraUno);
+//		tvd.checkValiditaAbbonamento(tesseraUno);
+		
+		pvd.getTicketsBySalesPoint("88db3b5f-e0f3-4341-b933-8d3cdeae2636");
 		
 		emf.close();
 	}

@@ -36,7 +36,6 @@ public class Tessera {
 	private LocalDate data_scadenza;
 
 
-
 	public Tessera(LocalDate data_creazione) {
 		super();
 		this.data_creazione = data_creazione;
