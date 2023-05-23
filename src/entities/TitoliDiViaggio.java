@@ -3,12 +3,14 @@ package entities;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -31,8 +33,12 @@ public abstract class TitoliDiViaggio {
 	private LocalDate dataEmissione;
 	private boolean convalidato;
 	
-	public TitoliDiViaggio(LocalDate dataEmissione, boolean convalidato) {
+	@ManyToOne(cascade = CascadeType.ALL)
+	private PuntiVendita puntoVendita;
+	
+	public TitoliDiViaggio(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita) {
 		this.dataEmissione = dataEmissione;
 		this.convalidato = convalidato;
+		this.puntoVendita = puntoVendita;
 	}
 }

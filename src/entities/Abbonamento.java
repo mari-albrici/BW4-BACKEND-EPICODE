@@ -23,12 +23,11 @@ public class Abbonamento extends TitoliDiViaggio {
 	private LocalDate dataScadenza;
 
 	@OneToOne
-	// ERRORE DIRLO AGLI ALTRI
 	private Tessera numeroTessera;
 
-	public Abbonamento(LocalDate dataEmissione, boolean convalidato, Periodicità periodicità, LocalDate dataScadenza,
+	public Abbonamento(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita,  Periodicità periodicità, LocalDate dataScadenza,
 			Tessera numeroTessera) {
-		super(dataEmissione, convalidato);
+		super(dataEmissione, convalidato, puntoVendita);
 		this.periodicità = periodicità;
 		this.dataScadenza = dataScadenza;
 		this.numeroTessera = numeroTessera;

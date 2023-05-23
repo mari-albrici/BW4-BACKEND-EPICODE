@@ -1,5 +1,6 @@
 package entities;
 import javax.persistence.DiscriminatorValue;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -7,6 +8,7 @@ import javax.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Entity
 @DiscriminatorValue("distributore_automatico")
 @Getter
@@ -16,8 +18,8 @@ public class DistributoriAutomatici extends PuntiVendita{
 	@Enumerated(EnumType.STRING)
 	private Stato stato;
 
-	public DistributoriAutomatici(String indirizzo, Stato stato) {
-		super(indirizzo);
+	public DistributoriAutomatici(String indirizzo, Integer numeroVendite, Stato stato) {
+		super(indirizzo, numeroVendite, true);
 		this.stato = stato;
 	}
 

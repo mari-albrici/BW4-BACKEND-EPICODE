@@ -2,10 +2,15 @@ package entities;
 
 import javax.persistence.*;
 
-import entities.Tessera;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "utenti")
+@Getter
+@Setter
+@NoArgsConstructor
 @NamedQuery(name="utenti.findAll", query = "SELECT e FROM Utente e")
 @NamedQuery(name="utenti.findId", query = "SELECT e FROM Utente e WHERE e.id = :id")
 @NamedQuery(name="utenti.findTessera", query = "SELECT e FROM Utente e WHERE tessera_utente = :tessera")
@@ -16,7 +21,7 @@ public class Utente {
 	@Column(name = "id")
 	private Long id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name= "tessera_utente", unique= true)
 	private Tessera tessera;
 	
@@ -25,8 +30,7 @@ public class Utente {
 	
 	@Column(nullable = false)
 	private String cognome;
-	
-	public Utente () {}
+
 
 	public Utente(Tessera tessera, String nome, String cognome) {
 		super();
@@ -34,32 +38,9 @@ public class Utente {
 		this.nome = nome;
 		this.cognome = cognome;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public Tessera getTessera() {
-		return tessera;
-	}
-
-	public void setTessera(Tessera numero_tessera) {
-		this.tessera = numero_tessera;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
+	
+	public Utente(String nome, String cognome) {
 		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
 

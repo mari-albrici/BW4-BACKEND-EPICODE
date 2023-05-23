@@ -1,32 +1,36 @@
 package dao;
 
 import java.time.LocalDate;
-import java.util.UUID;
-
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import entities.Abbonamento;
+import entities.Tessera;
 import entities.TitoliDiViaggio;
 
 public class TitoliDiViaggioDAO {
 
-	private final EntityManager em;
+	private EntityManagerFactory emf;
 
-	public TitoliDiViaggioDAO(EntityManager em) {
-		this.em = em;
+	public TitoliDiViaggioDAO(EntityManagerFactory emf) {
+		this.emf = emf;
 	}
 	
 	public void save(TitoliDiViaggio tv) {
+		EntityManager em = emf.createEntityManager();
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
 		em.persist(tv);
 		transaction.commit(); 
 		System.out.println("Titolo di viaggio creato!");
+		em.close();
 	}
 	
-	public boolean checkValiditaAbbonamento(UUID numeroTessera) {
+	public boolean checkValiditaAbbonamento(Tessera numeroTessera) {
+		EntityManager em = emf.createEntityManager();
 		Abbonamento foundAbbonamento = em.find(Abbonamento.class, numeroTessera);
+		em.close();
 		if(foundAbbonamento.getDataScadenza().isBefore(LocalDate.now()) ) {
 			System.out.println("ABBONAMENTO VALIDO");
 			return true;
@@ -35,4 +39,5 @@ public class TitoliDiViaggioDAO {
 			return false;
 		}
 	}
+	
 }

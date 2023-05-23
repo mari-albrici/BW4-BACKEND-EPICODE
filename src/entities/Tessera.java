@@ -4,11 +4,15 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 
-import entities.Abbonamento;
-import entities.Utente;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tessere")
+@Getter
+@Setter
+@NoArgsConstructor
 @NamedQuery(name="tessere.findAll", query = "SELECT t FROM Tessera t")
 @NamedQuery(name="findTesseraById", query = "SELECT t FROM Tessera t WHERE numero_tessera = :id")
 @SequenceGenerator(name= "tessera_sequence", sequenceName = "tessera_sequence", initialValue = 1000, allocationSize = 0)
@@ -22,17 +26,15 @@ public class Tessera {
 	@OneToOne(mappedBy= "tessera")
 	private Utente utenti;
 	
-//	@OneToOne(mappedBy= "tessera")
-//	private Abbonamento abbonamento;
+	@OneToOne(mappedBy= "numeroTessera")
+	private Abbonamento abbonamento;
 	
 	@Column(nullable = false)
 	private LocalDate data_creazione;
 	
 	@Column(nullable = false)
 	private LocalDate data_scadenza;
-	
-	
-	public Tessera() {}
+
 
 
 	public Tessera(LocalDate data_creazione) {
@@ -41,29 +43,11 @@ public class Tessera {
 		this.data_scadenza = data_creazione.plusYears(1);
 	}
 
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public LocalDate getData_creazione() {
-		return data_creazione;
-	}
-
-
 	public void setData_creazione(LocalDate data_creazione) {
 		this.data_creazione = data_creazione;
 		this.data_scadenza = data_creazione.plusYears(1);
 	}
 
-	public LocalDate getData_scadenza() {
-		return data_scadenza;
-	}
-
-	public void setData_scadenza(LocalDate data_scadenza) {
-		this.data_scadenza = data_scadenza;
-	}
 
 	@Override
 	public String toString() {

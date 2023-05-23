@@ -16,7 +16,7 @@ public class TesseraDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(TesseraDAO.class);
 
-	public static void save(Tessera a) {
+	public void save(Tessera a) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -42,7 +42,7 @@ public class TesseraDAO {
 
 	}
 
-	public static Tessera getById(int id) {
+	public Tessera getById(int id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -64,7 +64,7 @@ public class TesseraDAO {
 
 	}
 
-	public static void delete(int id) {
+	public void delete(int id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();

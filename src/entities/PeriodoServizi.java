@@ -32,6 +32,7 @@ public class PeriodoServizi {
 	@Id
 	@GeneratedValue
 	private UUID id;
+	
 	@ManyToOne
 	private ParcoMezzi mezzo;
 	private LocalDate dataInizio;

@@ -1,6 +1,8 @@
 package entities;
+import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,25 +19,27 @@ import lombok.Setter;
 @Entity
 @Table(name = "punti_vendita")
 @DiscriminatorColumn(name = "tipologia")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //consigliato per avere migliori performance e in questo caso 
-													//possibilmente avremo solo un campo null.
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //consigliato per avere migliori performance e in questo caso 											//possibilmente avremo solo un campo null.
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class PuntiVendita {
+public class PuntiVendita {
 	@Id
 	@GeneratedValue
 	private UUID id;
 	private String indirizzo;
 	private Integer numeroVendite;
 	
-	//@OneToMany(mappedBy = punti_vendita) 
-	//public List<TitoliDiViaggio> titoli_di_viaggio;
+	private boolean isDistributore;
 	
-	public PuntiVendita(String indirizzo) {
+	@OneToMany(mappedBy = "puntoVendita", cascade = CascadeType.ALL) 
+	private List<TitoliDiViaggio> titoli_di_viaggio;
+	
+	public PuntiVendita(String indirizzo, Integer numeroVendite, boolean isDistributore) {
 		super();
 		this.indirizzo = indirizzo;
 		this.numeroVendite = numeroVendite;
+		this.isDistributore = isDistributore;
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ public class UtenteDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(UtenteDAO.class);
 
-	public static void save(Utente a) {
+	public void save(Utente a) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -42,7 +41,7 @@ public class UtenteDAO {
 
 	}
 
-	public static Utente getById(int id) {
+	public Utente getById(long id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -64,7 +63,7 @@ public class UtenteDAO {
 
 	}
 
-	public static void delete(int id) {
+	public void delete(int id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -94,7 +93,7 @@ public class UtenteDAO {
 
 
 
-	public static void collegaTessera(int idUtente, Tessera tess) {
+	public void collegaTessera(long idUtente, Tessera tess) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -102,15 +101,12 @@ public class UtenteDAO {
 		try {
 
 			EntityTransaction t = em.getTransaction();
-			
-			Query q = em.createQuery("UPDATE Utente u SET tessera = :t WHERE u.id = :id");
 
 			t.begin();
+			Utente utente = this.getById(idUtente);
+			
+			utente.setTessera(tess);
 
-			q.setParameter("t", tess);
-			q.setParameter("id", idUtente);
-
-			q.executeUpdate();
 			t.commit();
 			
 		} catch (Exception ex) {
