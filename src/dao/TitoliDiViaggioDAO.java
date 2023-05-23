@@ -2,6 +2,7 @@ package dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +12,10 @@ import javax.persistence.Query;
 import entities.Abbonamento;
 import entities.Biglietto;
 import entities.Tessera;
+import lombok.extern.slf4j.Slf4j;
+import utils.JPAUtil;
 
+@Slf4j
 public class TitoliDiViaggioDAO {
 
 	private EntityManagerFactory emf;
@@ -42,6 +46,40 @@ public class TitoliDiViaggioDAO {
 		transaction.commit();
 		em.close();
 		return results;
+	public Biglietto getById(String id) {
+
+		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+
+		try {
+
+			Biglietto p = em.find(Biglietto.class, UUID.fromString(id));
+			return p;
+
+		} catch (Exception ex) {
+
+			log.error("Error", ex);
+			throw ex;
+
+		} finally {
+
+			em.close();
+		}
+
+	}
+
+	public void vidimazioneBiglietto(String id) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		Biglietto bigliettoDaVidimare = this.getById(id);
+		bigliettoDaVidimare.setVidimato(true);
+		bigliettoDaVidimare.setDataVidimazione(LocalDate.now());
+		bigliettoDaVidimare.setConvalidato(false);
+		System.out.println("Biglietto vidimato e annullato correttamente.");
+		em.merge(bigliettoDaVidimare);
+		transaction.commit();
+		em.close();
 	}
 
 	public void saveAbbonamento(Abbonamento a) {

@@ -34,4 +34,12 @@ public class Biglietto extends TitoliDiViaggio {
 		this.mezzo = mezzo;
 		this.dataVidimazione = dataVidimazione;
 	}
+
+	public Biglietto(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita, ParcoMezzi mezzo) {
+		super(dataEmissione, convalidato, puntoVendita);
+		this.vidimato = false;
+		this.mezzo = mezzo;
+		this.dataVidimazione = null;
+	}
+
 }
