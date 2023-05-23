@@ -42,7 +42,7 @@ public class TesseraDAO {
 
 	}
 
-	public Tessera getById(int id) {
+	public Tessera getById(long id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -64,7 +64,7 @@ public class TesseraDAO {
 
 	}
 
-	public void delete(int id) {
+	public void delete(long id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
