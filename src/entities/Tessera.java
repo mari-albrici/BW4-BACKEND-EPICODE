@@ -26,7 +26,7 @@ public class Tessera {
 	@OneToOne(mappedBy= "tessera")
 	private Utente utenti;
 	
-	@OneToOne(mappedBy= "numeroTessera")
+	@OneToOne(mappedBy= "numeroTessera", cascade = CascadeType.ALL)
 	private Abbonamento abbonamento;
 	
 	@Column(nullable = false)

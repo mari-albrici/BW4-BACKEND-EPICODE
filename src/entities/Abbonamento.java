@@ -2,6 +2,7 @@ package entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,7 +23,7 @@ public class Abbonamento extends TitoliDiViaggio {
 	private Periodicità periodicità;
 	private LocalDate dataScadenza;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Tessera numeroTessera;
 
 	public Abbonamento(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita,  Periodicità periodicità, LocalDate dataScadenza,
