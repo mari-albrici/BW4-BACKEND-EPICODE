@@ -51,8 +51,9 @@ public class ParcoMezzi {
 	@Enumerated(EnumType.STRING)
 	private TipoDiMezzo tipoDiMezzo;
 	
-	@OneToMany
-	private List<Biglietto> biglietti;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mezzo")
+	private Set<Biglietto> biglietti;
+	
 
 	public ParcoMezzi(stato_parcoMezzi stato, int capienza, Tratta tratta, LocalDateTime orarioDiPartenza,
 			LocalDateTime orarioDiArrivo, double tempoImpiegato, int numeroVoltePercorrenzaTratta,
