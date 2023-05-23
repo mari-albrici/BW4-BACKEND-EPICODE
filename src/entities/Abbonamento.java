@@ -22,10 +22,10 @@ public class Abbonamento extends TitoliDiViaggio{
 	private LocalDate dataScadenza; 
 	
 	@OneToOne
-	private long numeroTessera;
+	private Tessera numeroTessera;
 	
 
-	public Abbonamento(LocalDate dataEmissione, boolean convalidato, Periodicità periodicità, LocalDate dataScadenza, long numeroTessera) {
+	public Abbonamento(LocalDate dataEmissione, boolean convalidato, Periodicità periodicità, LocalDate dataScadenza, Tessera numeroTessera) {
 		super(dataEmissione, convalidato);
 		this.periodicità = periodicità;
 		this.dataScadenza = dataScadenza;
