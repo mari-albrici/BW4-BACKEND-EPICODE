@@ -13,16 +13,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Biglietto extends TitoliDiViaggio{
+public class Biglietto extends TitoliDiViaggio {
+
+	@Override
+	public String toString() {
+		return "Biglietto [vidimato=" + vidimato + ", dataVidimazione=" + dataVidimazione + ", Id=" + getId()
+				+ ", DataEmissione=" + getDataEmissione() + ", isConvalidato=" + isConvalidato() + "]";
+	}
 
 	private boolean vidimato;
-	
+
 	@ManyToOne
 	private ParcoMezzi mezzo;
 	private LocalDate dataVidimazione;
 
-	
-	public Biglietto(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita, boolean vidimato, ParcoMezzi mezzo, LocalDate dataVidimazione) {
+	public Biglietto(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita, boolean vidimato,
+			ParcoMezzi mezzo, LocalDate dataVidimazione) {
 		super(dataEmissione, convalidato, puntoVendita);
 		this.vidimato = vidimato;
 		this.mezzo = mezzo;
