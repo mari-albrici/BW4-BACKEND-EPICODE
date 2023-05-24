@@ -125,7 +125,7 @@ public class Application {
 			switch(scelta) {
 				case 1: 
 					
-					System.out.println("Inserisci true se e' un rivenditore autorizzato oppure false se e' un distributore automatico");
+					System.out.println("Inserisci true se e' un distributore automatico oppure false se e' un rivenditore autorizzato");
 					boolean distributore = scanner.nextBoolean();
 					if(distributore == false) {
 						
