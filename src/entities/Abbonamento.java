@@ -32,4 +32,11 @@ public class Abbonamento extends TitoliDiViaggio {
 		this.dataScadenza = dataScadenza;
 		this.numeroTessera = numeroTessera;
 	}
+
+	@Override
+	public String toString() {
+		return "Abbonamento [periodicità=" + periodicità + ", dataScadenza=" + dataScadenza + "]";
+	}
+	
+	
 }

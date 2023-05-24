@@ -2,6 +2,7 @@ package main;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -10,6 +11,8 @@ import dao.PuntiVenditaDAO;
 import dao.TesseraDAO;
 import dao.TitoliDiViaggioDAO;
 import dao.UtenteDAO;
+import dao.BigliettoDAO;
+import dao.AbbonamentoDAO;
 import entities.Abbonamento;
 import entities.Biglietto;
 import entities.ParcoMezzi;
@@ -36,6 +39,8 @@ public class Application {
 		ParcoMezziDAO pmd = new ParcoMezziDAO(emf);
 		PuntiVenditaDAO pvd = new PuntiVenditaDAO(emf);
 		TitoliDiViaggioDAO tvd = new TitoliDiViaggioDAO(emf);
+		BigliettoDAO bd = new BigliettoDAO(emf);
+		AbbonamentoDAO ad = new AbbonamentoDAO(emf);
 
 		Utente utente1 = new Utente("Mario", "Rossi");
 		//ud.save(utente1);
@@ -59,13 +64,14 @@ public class Application {
 		
 		//pvd.getById("1132b40d-f98a-4ce5-860a-34cacf61385e");
 		
-		
-		ParcoMezzi mezzoUno = pmd.getMezzo("82be1454-1136-4a2f-b729-c971423fec35");
-		mezzoUno.getBiglietti().stream().forEach(b -> log.info(b.toString()));
+		ParcoMezzi mezzoUno = pmd.getMezzo("e4d6336c-5886-4a22-bdd5-40d844066dbc");
+
 		
 		Biglietto biglietto1 = new Biglietto(LocalDate.of(2023, 05, 22), true, pvendita1, true, mezzoUno, LocalDate.of(2023, 05, 23));
 		//tvd.saveBiglietto(biglietto1);
 		
+		Biglietto biglietto2 = new Biglietto(LocalDate.of(2023, 04, 27), true, pvendita1, mezzoUno);
+//		tvd.saveBiglietto(biglietto2);
 	
 		Tessera tesseraUno = td.getById(1004);
 		
@@ -82,13 +88,67 @@ public class Application {
 		//System.out.println(mezzoUno.getPeriodoServizio());
 		
 		//tvd.checkValiditaAbbonamento(tesseraUno);
-
 		
-		pvd.getTicketsBySalesPoint("88db3b5f-e0f3-4341-b933-8d3cdeae2636");
-		
+		// ********* METODI DA CONTROLLARE *******
 
-		tvd.bigliettiVendutiPerTempo(LocalDate.of(2023, 05, 10), LocalDate.of(2023, 05, 26)).stream()
-				.forEach(b -> log.info(b.toString()));
+//		pvd.getTicketsBySalesPoint("88db3b5f-e0f3-4341-b933-8d3cdeae2636");
+		
+//		tvd.bigliettiVendutiPerTempo(LocalDate.of(2023, 05, 10), LocalDate.of(2023, 05, 26)).stream()
+//				.forEach(b -> log.info(b.toString()));
+		
+//		mezzoUno.getBiglietti().stream().forEach(b -> log.info(b.toString()));
+		
+//		System.out.println("!!: " + bd.contaBigliettiVidimatiInPeriodo(LocalDate.of(2023, 01, 01), LocalDate.now()));
+		
+//		 ad.getAbbonamentiEmessiInPeriodo(LocalDate.of(2023, 01, 01), LocalDate.now()).stream()
+//			.forEach(b -> log.info(b.toString()));
+		
+//		tvd.vidimazioneBiglietto("8f419c65-65f3-410b-a625-f48167f46c4f");
+		
+		
+		
+		
+		
+		// ********** INTERFACCIA - SWITCH **********
+		
+		Scanner input = new Scanner(System.in);
+		
+		int chosenAction = -1;
+		
+		log.info("Choose an action: ");
+		
+		while(chosenAction != 0) {
+			
+			chosenAction = input.nextInt();
+			
+			switch(chosenAction) {
+			case 1: ;
+			case 2: ;
+			case 3: ;
+			case 4: ;
+			case 5: 
+				log.info("TITOLI DI VIAGGIO. Scegliere tra: ");
+				log.info("1. BIGLIETTI");
+				log.info("2. ABBONAMENTI");
+				int action = input.nextInt();
+				switch(action) {
+					case 1: 
+						log.info("1. BIGLIETTI");
+						break;
+					case 2: log.info("2. ABBONAMENTI");
+						break;
+					default: 
+						System.out.println("Action not available. Please choose a number between 1 and 2 or type 0 to exit the program.");
+					input.close();
+				}
+				break;
+			case 0: ;
+			default: 
+					System.out.println("Action not available. Please choose a number between 1 and 5 or type 0 to exit the program.");
+					input.close();
+			}
+		}	
+	
 		
 		
 		
