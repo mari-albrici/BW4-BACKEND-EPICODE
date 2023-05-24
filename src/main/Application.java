@@ -20,7 +20,7 @@ import entities.PuntiVendita;
 import entities.Tessera;
 import entities.Tratta;
 import entities.Utente;
-import entities.enums.Periodicità;
+import entities.enums.PeriodicitÃ ;
 import entities.enums.TipoDiMezzo;
 import entities.enums.stato_parcoMezzi;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ public class Application {
 		// pvd.getById("1132b40d-f98a-4ce5-860a-34cacf61385e");
 
 		ParcoMezzi mezzoUno = pmd.getMezzo("82be1454-1136-4a2f-b729-c971423fec35");
-		mezzoUno.getBiglietti().stream().forEach(b -> log.info(b.toString()));
+		//mezzoUno.getBiglietti().stream().forEach(b -> log.info(b.toString()));
 
 		Biglietto biglietto1 = new Biglietto(LocalDate.of(2023, 05, 22), true, pvendita1, true, mezzoUno,
 				LocalDate.of(2023, 05, 23));
@@ -61,7 +61,7 @@ public class Application {
 
 		Tessera tesseraUno = td.getById(1004);
 
-		Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2023, 03, 10), true, pvendita1, Periodicità.SETTIMANALE,
+		Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2023, 03, 10), true, pvendita1, PeriodicitÃ .SETTIMANALE,
 				LocalDate.of(2023, 03, 10).plusDays(7), tesseraUno);
 		// tvd.saveAbbonamento(abbonamento1);
 
@@ -77,10 +77,9 @@ public class Application {
 
 		// tvd.checkValiditaAbbonamento(tesseraUno);
 
-		pvd.getTicketsBySalesPoint("88db3b5f-e0f3-4341-b933-8d3cdeae2636");
+		//pvd.getTicketsBySalesPoint("88db3b5f-e0f3-4341-b933-8d3cdeae2636");
 
-		tvd.bigliettiVendutiPerTempo(LocalDate.of(2023, 05, 10), LocalDate.of(2023, 05, 26)).stream()
-				.forEach(b -> log.info(b.toString()));
+		//tvd.bigliettiVendutiPerTempo(LocalDate.of(2023, 05, 10), LocalDate.of(2023, 05, 26)).stream().forEach(b -> log.info(b.toString()));
 
 		emf.close();
 
@@ -147,7 +146,7 @@ public class Application {
 				numeroInserito = 6;
 			}
 		}
-		// °°°°°°°°°°°°°°°°°°°°°°°°°°°° SCANNER PRINCIPALE °°°°°°°°°°°°°°°°°°°°°°°°°°
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SCANNER PRINCIPALE ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //		Scanner scan = new Scanner(System.in);
 //
 //		int numberInsert = 1;
