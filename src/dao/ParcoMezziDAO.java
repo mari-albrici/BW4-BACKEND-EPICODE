@@ -1,10 +1,12 @@
 package dao;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import entities.ParcoMezzi;
 import entities.PeriodoManutenzione;
@@ -76,6 +78,28 @@ public class ParcoMezziDAO {
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		Tratta risposta = em.find(Tratta.class, UUID.fromString(tratta));
+		t.commit();
+		em.close();
+		return risposta;
+	}
+
+	public List<ParcoMezzi> getAllMezzi() {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Query query = em.createQuery("SELECT m FROM ParcoMezzi m");
+		List<ParcoMezzi> risposta = query.getResultList();
+		t.commit();
+		em.close();
+		return risposta;
+	}
+
+	public List<Tratta> getAllTratte() {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Query query = em.createQuery("SELECT t FROM Tratta t");
+		List<Tratta> risposta = query.getResultList();
 		t.commit();
 		em.close();
 		return risposta;
