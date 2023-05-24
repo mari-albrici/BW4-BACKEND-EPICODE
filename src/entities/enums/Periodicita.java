@@ -1,7 +1,5 @@
 package entities.enums;
 
-public enum Periodicità
-
-{
+public enum Periodicita {
 	SETTIMANALE, MENSILE
 }

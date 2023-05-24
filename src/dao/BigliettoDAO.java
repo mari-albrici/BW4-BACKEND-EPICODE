@@ -14,7 +14,8 @@ public class BigliettoDAO {
     // Costruttore
 
     public int contaBigliettiVidimatiInPeriodo(LocalDate dataInizio, LocalDate dataFine) {
-        TypedQuery<Long> query = ((EntityManager) emf).createQuery(
+    	EntityManager em = emf.createEntityManager();
+        TypedQuery<Long> query = em.createQuery(
             "SELECT COUNT(b) FROM Biglietto b WHERE b.vidimato = true " +
             "AND b.dataVidimazione >= :dataInizio AND b.dataVidimazione <= :dataFine",
             Long.class
