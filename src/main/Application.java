@@ -23,7 +23,7 @@ import entities.PuntiVendita;
 import entities.Tessera;
 import entities.Tratta;
 import entities.Utente;
-import entities.enums.Periodicità;
+import entities.enums.Periodicita;
 import entities.enums.TipoDiMezzo;
 import entities.enums.stato_parcoMezzi;
 import lombok.extern.slf4j.Slf4j;
@@ -205,13 +205,42 @@ public class Application {
 		scelta = input.nextInt();
 		
 		switch(scelta) {
-		case 1: ;
+		case 1: 
+			// CREA
+			LocalDate dataEmissione = LocalDate.now();
+			System.out.println("Inserire ID punto vendita");
+			String pvenditaId = input.nextLine();
+			PuntiVendita pvendita = pvd.getById(pvenditaId);
+			System.out.println("Selezionare periodi di validità: 1 per settimanale o 2 per mensile");
+			int periodicitaScelta = input.nextInt();
+			
+			Periodicita periodicità = null;
+			LocalDate dataScadenza = null;
+			
+			if(periodicitaScelta == 1) {
+				periodicità = Periodicita.SETTIMANALE;
+				dataScadenza = dataEmissione.plusDays(7);
+			} else if(periodicitaScelta == 2) {
+				periodicità = Periodicita.MENSILE;
+				dataScadenza = dataEmissione.plusDays(30);
+			}
+			System.out.println("Inserire ID mezzo");
+			String mezzoId = input.nextLine();
+			ParcoMezzi mezzo = pmd.getMezzo(mezzoId);
+			
+			System.out.println("Selezionare ID tessera su cui attivare l'abbonamento: ");
+			long tesseraID = input.nextInt();
+			Tessera tessera = td.getById(tesseraID);
+			
+			Abbonamento abbonamento = new Abbonamento(dataEmissione, true, pvendita, periodicità, dataScadenza, tessera );
+			System.out.println("Abbonamento creato correttamente: " + abbonamento.toString());
+			break;
 		case 2: 
 			//CHECK VALIDITA' 
 			System.out.println("Inserire ID tessera da cercare: ");
 			long tesseraCercata = input.nextInt();
-			Tessera tessera = td.getById(tesseraCercata);
-			tvd.checkValiditaAbbonamento(tessera);
+			Tessera tesseraC = td.getById(tesseraCercata);
+			tvd.checkValiditaAbbonamento(tesseraC);
 			break;
 		default: 
 			System.out.println("Action not available. Please choose a number between 1 and 2 or type 0 to exit the program.");

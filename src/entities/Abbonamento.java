@@ -7,7 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 
-import entities.enums.Periodicità;
+import entities.enums.Periodicita;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,13 +19,13 @@ import lombok.Setter;
 public class Abbonamento extends TitoliDiViaggio {
 
 	@Enumerated(EnumType.STRING)
-	private Periodicità periodicità;
+	private Periodicita periodicità;
 	private LocalDate dataScadenza;
 
 	@OneToOne
 	private Tessera numeroTessera;
 
-	public Abbonamento(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita, Periodicità periodicità,
+	public Abbonamento(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita, Periodicita periodicità,
 			LocalDate dataScadenza, Tessera numeroTessera) {
 		super(dataEmissione, convalidato, puntoVendita);
 		this.periodicità = periodicità;
