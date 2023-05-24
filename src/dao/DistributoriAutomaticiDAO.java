@@ -20,9 +20,9 @@ public class DistributoriAutomaticiDAO {
 	public void save(DistributoriAutomatici d) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction transaction = em.getTransaction();
-		transaction.begin();//partono le operazioni che voglio fare nel database
-		em.persist(d);//salvera nel database cio che passo
-		transaction.commit();//termina la transazione ed effettua il flush del oggetto
+		transaction.begin();
+		em.persist(d);
+		transaction.commit();
 		System.out.println("Distributore automatico salvato correttamente");
 	}
 	

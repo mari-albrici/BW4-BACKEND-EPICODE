@@ -148,14 +148,14 @@ public class Application {
 						Integer numeroVendite = scanner.nextInt();
 						
 						System.out.println("Inserisci lo stato del distributore ovvero attivo o disattivo");
-						scanner.next();
-						String stato = scanner.nextLine();
+						scanner.nextLine();
+						String statoDistributore = scanner.nextLine();
 						
-						if(stato == "attivo") {
+						if(statoDistributore.matches("attivo")) {
 							DistributoriAutomatici distributoriAuto = new DistributoriAutomatici(indirizzo, numeroVendite, Stato.attivo);
 							da.save(distributoriAuto);
 							
-						}else if(stato == "disattivo"){
+						}else if(statoDistributore.matches("disattivo")){
 							DistributoriAutomatici distributoriAuto = new DistributoriAutomatici(indirizzo, numeroVendite, Stato.disattivo);
 							da.save(distributoriAuto);
 						}
