@@ -164,18 +164,23 @@ public class Application {
 		
 		int scelta;
 		scelta = input.nextInt();
+		input.nextLine();
 		switch(scelta) {
+		
 		case 1: 
 			// CREA
-			System.out.println("Inserire ID punto vendita");
-			String pvenditaId = input.nextLine();
-			PuntiVendita pvendita = pvd.getById(pvenditaId);
 			System.out.println("Inserire ID mezzo");
 			String mezzoId = input.nextLine();
 			ParcoMezzi mezzo = pmd.getMezzo(mezzoId);
+			
+			System.out.println("Inserire ID punto vendita");
+			String pvenditaId = input.nextLine();
+			PuntiVendita pvendita = pvd.getById(pvenditaId);
+			
 			Biglietto biglietto = new Biglietto(LocalDate.now(), true, pvendita, mezzo);
 			System.out.println("Biglietto creato correttamente: " + biglietto.toString());
 			break;
+			
 		case 2: 
 			//CERCA
 			System.out.println("Inserire ID biglietto da cercare: ");
@@ -183,6 +188,7 @@ public class Application {
 			tvd.getById(bigliettoCercato);
 			System.out.println("Il biglietto cercato è: " + bigliettoCercato.toString());
 			break;
+			
 		case 3: 
 			//VIDIMA
 			System.out.println("Inserire ID biglietto da vidimare: ");
@@ -190,6 +196,7 @@ public class Application {
 			tvd.vidimazioneBiglietto(bigliettoVidimare);
 			System.out.println("Il biglietto vidimato correttamente è: " + bigliettoVidimare.toString());
 			break;
+			
 		default: 
 			System.out.println("Action not available. Please choose a number between 1 and 2 or type 0 to exit the program.");
 		}
@@ -203,6 +210,7 @@ public class Application {
 		
 		int scelta;
 		scelta = input.nextInt();
+		input.nextLine();
 		
 		switch(scelta) {
 		case 1: 
@@ -211,6 +219,7 @@ public class Application {
 			System.out.println("Inserire ID punto vendita");
 			String pvenditaId = input.nextLine();
 			PuntiVendita pvendita = pvd.getById(pvenditaId);
+			
 			System.out.println("Selezionare periodi di validità: 1 per settimanale o 2 per mensile");
 			int periodicitaScelta = input.nextInt();
 			
@@ -224,9 +233,6 @@ public class Application {
 				periodicità = Periodicita.MENSILE;
 				dataScadenza = dataEmissione.plusDays(30);
 			}
-			System.out.println("Inserire ID mezzo");
-			String mezzoId = input.nextLine();
-			ParcoMezzi mezzo = pmd.getMezzo(mezzoId);
 			
 			System.out.println("Selezionare ID tessera su cui attivare l'abbonamento: ");
 			long tesseraID = input.nextInt();
