@@ -105,13 +105,11 @@ public class ParcoMezziDAO {
 		return risposta;
 	}
 	
-	
-	
-//	public ParcoMezzi findMezzoMoreManutenzione(String n){
-//		EntityManager em = emf.createEntityManager();
-//		TypedQuery<ParcoMezzi> query = em.createNamedQuery("ParcoMezzi.findMezzoMoreManutenzione", ParcoMezzi.class);
-//		query.setMaxResults(1);
-//		return query.getSingleResult();
-//	}
+	public ParcoMezzi findMezzoMoreManutenzione(){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<ParcoMezzi> query = em.createNamedQuery("ParcoMezzi.findMezzoMoreManutenzione", ParcoMezzi.class);
+		query.setMaxResults(1);
+		return query.getSingleResult();
+	}
 
 }

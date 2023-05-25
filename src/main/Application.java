@@ -46,6 +46,7 @@ public class Application {
 	public static void main(String[] args) {
 		//log.info(pvd.findVenditeMax().toString());
 		//log.info(da.distributoriAutomaticiDisattiviOAttivi(Stato.attivo).toString());
+		//log.info(pmd.findMezzoMoreManutenzione().toString());
 
 		// ********** INTERFACCIA - SWITCH **********
 
