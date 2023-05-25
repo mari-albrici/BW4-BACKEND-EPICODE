@@ -41,9 +41,12 @@ public class Application {
 	static TitoliDiViaggioDAO tvd = new TitoliDiViaggioDAO(emf);
 	static BigliettoDAO bd = new BigliettoDAO(emf);
 	static AbbonamentoDAO ad = new AbbonamentoDAO(emf);
+	static DistributoriAutomaticiDAO da = new DistributoriAutomaticiDAO(emf);
 
 	public static void main(String[] args) {
-		
+		//log.info(pvd.findVenditeMax().toString());
+		//log.info(da.distributoriAutomaticiDisattiviOAttivi(Stato.attivo).toString());
+		//log.info(pmd.findMezzoMoreManutenzione().toString());
 
 		// ********** INTERFACCIA - SWITCH **********
 

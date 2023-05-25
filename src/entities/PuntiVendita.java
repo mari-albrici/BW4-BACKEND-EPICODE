@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,11 +21,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "punti_vendita")
 @DiscriminatorColumn(name = "tipologia")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // consigliato per avere migliori performance e in questo caso
-														// //possibilmente avremo solo un campo null.
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) 
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedQuery(name = "PuntiVendita.findVenditeMax", query = "SELECT a FROM PuntiVendita a WHERE a.numeroVendite > 30")
 public class PuntiVendita {
 	@Id
 	@GeneratedValue

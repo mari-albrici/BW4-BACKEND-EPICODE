@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.NamedQuery;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedQuery(name = "DistributoriAutomatici.distributoriAutomaticiDisattiviOAttivi" , query = "SELECT d FROM DistributoriAutomatici d WHERE d.stato = :stato")
 public class DistributoriAutomatici extends PuntiVendita {
 	@Enumerated(EnumType.STRING)
 	private Stato stato;

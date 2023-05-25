@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +27,14 @@ import lombok.Setter;
 @Entity
 @Table
 @NoArgsConstructor
+//@NamedQuery(
+//	    name = "ParcoMezzi.findMezzoMoreManutenzione",
+//	    query = "SELECT pm.mezzo " +
+//	            "FROM PeriodoManutenzione pm " +
+//	            "GROUP BY pm.mezzo " +
+//	            "ORDER BY COUNT(pm.mezzo) DESC"
+//	)
+
 public class ParcoMezzi {
 
 	@Id
