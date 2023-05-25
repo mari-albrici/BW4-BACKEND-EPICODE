@@ -1,10 +1,15 @@
 package dao;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+
 import entities.DistributoriAutomatici;
+import entities.PuntiVendita;
+import entities.Stato;
 
 public class DistributoriAutomaticiDAO {
 	
@@ -46,5 +51,11 @@ public class DistributoriAutomaticiDAO {
 		}else {
 			System.out.println("id non trovato");
 		}
+	}
+	public List<DistributoriAutomatici> distributoriAutomaticiDisattiviOAttivi(Stato stato){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<DistributoriAutomatici> query = em.createNamedQuery("DistributoriAutomatici.distributoriAutomaticiDisattiviOAttivi", DistributoriAutomatici.class);
+		query.setParameter("stato", stato);
+		return query.getResultList();
 	}
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import entities.PuntiVendita;
 
@@ -74,4 +75,12 @@ public class PuntiVenditaDAO {
 		em.close();
 		return risposta;
 	}
+	
+	public List<PuntiVendita> findVenditeMax(){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<PuntiVendita> query = em.createNamedQuery("PuntiVendita.findVenditeMax", PuntiVendita.class);
+		return query.getResultList();
+	}
 }
+
+
