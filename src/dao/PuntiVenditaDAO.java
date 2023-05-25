@@ -1,11 +1,13 @@
 package dao;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+
 import entities.PuntiVendita;
 
 public class PuntiVenditaDAO {
@@ -32,7 +34,7 @@ public class PuntiVenditaDAO {
 		em.close();
 		return found;
 	}
-	
+
 	public void FindAndDelete(String id) {
 		EntityManager em = emf.createEntityManager();
 		PuntiVendita found = em.find(PuntiVendita.class, UUID.fromString(id));
@@ -42,23 +44,34 @@ public class PuntiVenditaDAO {
 			em.remove(found);
 			transaction.commit();
 			System.out.println("Punto vendita con id " + id + " eliminato!");
-		}else {
+		} else {
 			System.out.println("id non trovato");
 		}
 		em.close();
 	}
-	
+
 	public void getTicketsBySalesPoint(String id) {
 		EntityManager em = emf.createEntityManager();
 		Query q = em.createQuery("SELECT COUNT(*) FROM TitoliDiViaggio t WHERE t.puntoVendita = :puntoVendita");
-		
+
 		PuntiVendita selezionato = this.getById(id);
-		
+
 		q.setParameter("puntoVendita", selezionato);
-		
-		long totalTickets =  (long) q.getSingleResult();
-		
+
+		long totalTickets = q.getResultList().size();
+
 		System.out.println("Il numero di biglietti venduto nel punto vendita selezionato è: " + totalTickets);
 		em.close();
+	}
+
+	public List<PuntiVendita> getAllPuntiVendita() {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Query query = em.createQuery("SELECT p FROM PuntiVendita p");
+		List<PuntiVendita> risposta = query.getResultList();
+		t.commit();
+		em.close();
+		return risposta;
 	}
 }

@@ -1,54 +1,44 @@
 package dao;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+
+import entities.Biglietto;
+import utils.JPAUtil;
 
 public class BigliettoDAO {
 	private EntityManagerFactory emf;
 
-    public BigliettoDAO(EntityManagerFactory emf) {
+	public BigliettoDAO(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
-    // Costruttore
+	// Costruttore
 
-    public int contaBigliettiVidimatiInPeriodo(LocalDate dataInizio, LocalDate dataFine) {
-    	EntityManager em = emf.createEntityManager();
-        TypedQuery<Long> query = em.createQuery(
-            "SELECT COUNT(b) FROM Biglietto b WHERE b.vidimato = true " +
-            "AND b.dataVidimazione >= :dataInizio AND b.dataVidimazione <= :dataFine",
-            Long.class
-        );
-        query.setParameter("dataInizio", dataInizio);
-        query.setParameter("dataFine", dataFine);
+	public List<Biglietto> contaBigliettiVidimatiInPeriodo(LocalDate dataInizio, LocalDate dataFine) {
+		EntityManager em = emf.createEntityManager();
+		Query query = em.createQuery("SELECT b FROM Biglietto b WHERE b.vidimato = true "
+				+ "AND b.dataVidimazione >= :dataInizio AND b.dataVidimazione <= :dataFine");
+		query.setParameter("dataInizio", dataInizio);
+		query.setParameter("dataFine", dataFine);
 
-        Long count = query.getSingleResult();
-        return count.intValue();
-    }
+		List<Biglietto> count = query.getResultList();
+		return count;
+	}
 
-    
+	public List<Biglietto> getAllBiglietti() {
+		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Query query = em.createQuery("SELECT b FROM Biglietto b");
+		List<Biglietto> risposta = query.getResultList();
+		t.commit();
+		em.close();
+		return risposta;
+	}
 }
-//*************PROVA DA INSERIRE NEL MAIN*****
-//public class Main {
-//    public static void main(String[] args) {
-//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("your-persistence-unit-name");
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        BigliettoDAO bigliettoDAO = new BigliettoDAO(entityManager);
-//
-//        
-//        LocalDate dataInizio = LocalDate.of(2023, 1, 1);
-//        LocalDate dataFine = LocalDate.of(2023, 12, 31);
-//
-//       
-//        int numeroBigliettiVidimati = bigliettoDAO.contaBigliettiVidimatiInPeriodo(dataInizio, dataFine);
-//
-//       
-//        System.out.println("Numero di biglietti vidimati nel periodo: " + numeroBigliettiVidimati);
-//
-//        
-//        entityManager.close();
-//        entityManagerFactory.close();
-//    }
-//}
-
