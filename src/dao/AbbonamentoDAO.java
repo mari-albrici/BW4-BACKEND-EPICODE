@@ -61,3 +61,27 @@ public class AbbonamentoDAO {
 	    return query.getResultList();
 	}
 }
+        return query.getResultList();
+    }
+    
+    public List<Abbonamento> getStoricoAbbonamentiPerNumeroTessera(Long numeroTessera) {
+    	EntityManager em = emf.createEntityManager();
+        TypedQuery<Abbonamento> query = em.createQuery(
+            "SELECT a FROM Abbonamento a WHERE a.numeroTessera.id = :numeroTessera", Abbonamento.class);
+        query.setParameter("numeroTessera", numeroTessera);
+        return query.getResultList();
+    }
+    
+    public List<Abbonamento> getStoricoAbbonamentiPerUtente(Long idUtente) {
+    	EntityManager em = emf.createEntityManager();
+        TypedQuery<Abbonamento> query = em.createQuery(
+            "SELECT a FROM Abbonamento a WHERE a.numeroTessera.utenti.id = :idUtente", Abbonamento.class);
+        query.setParameter("idUtente", idUtente);
+        return query.getResultList();
+    }
+
+}
+
+
+
+
