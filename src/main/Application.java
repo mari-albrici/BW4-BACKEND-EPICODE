@@ -43,6 +43,7 @@ public class Application {
 	static AbbonamentoDAO ad = new AbbonamentoDAO(emf);
 
 	public static void main(String[] args) {
+		
 
 		// ********** INTERFACCIA - SWITCH **********
 
