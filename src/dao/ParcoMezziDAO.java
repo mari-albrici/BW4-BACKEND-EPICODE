@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-
+import javax.persistence.TypedQuery;
 import entities.ParcoMezzi;
 import entities.PeriodoManutenzione;
 import entities.PeriodoServizi;
@@ -104,5 +104,14 @@ public class ParcoMezziDAO {
 		em.close();
 		return risposta;
 	}
+	
+	
+	
+//	public ParcoMezzi findMezzoMoreManutenzione(String n){
+//		EntityManager em = emf.createEntityManager();
+//		TypedQuery<ParcoMezzi> query = em.createNamedQuery("ParcoMezzi.findMezzoMoreManutenzione", ParcoMezzi.class);
+//		query.setMaxResults(1);
+//		return query.getSingleResult();
+//	}
 
 }

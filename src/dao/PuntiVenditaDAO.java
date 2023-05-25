@@ -1,11 +1,14 @@
 package dao;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import entities.PuntiVendita;
 
 public class PuntiVenditaDAO {
@@ -60,5 +63,13 @@ public class PuntiVenditaDAO {
 		
 		System.out.println("Il numero di biglietti venduto nel punto vendita selezionato è: " + totalTickets);
 		em.close();
+	}
+	
+	
+	
+	public List<PuntiVendita> findVenditeMax(){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<PuntiVendita> query = em.createNamedQuery("PuntiVendita.findVenditeMax", PuntiVendita.class);
+		return query.getResultList();
 	}
 }
