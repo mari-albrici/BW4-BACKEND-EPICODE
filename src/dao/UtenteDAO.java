@@ -1,15 +1,18 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import utils.JPAUtil;
 import entities.Tessera;
 import entities.Utente;
+import utils.JPAUtil;
 
 public class UtenteDAO {
 
@@ -41,6 +44,18 @@ public class UtenteDAO {
 
 	}
 
+	public List<Utente> getAllUtenti() {
+		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Query query = em.createQuery("SELECT u FROM Utente u");
+		List<Utente> risposta = query.getResultList();
+		t.commit();
+		em.close();
+		return risposta;
+	}
+
 	public Utente getById(long id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
@@ -63,7 +78,7 @@ public class UtenteDAO {
 
 	}
 
-	public void delete(int id) {
+	public void delete(Long id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -91,8 +106,7 @@ public class UtenteDAO {
 
 	}
 
-
-
+	// ##################################
 	public void collegaTessera(long idUtente, Tessera tess) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
@@ -104,11 +118,11 @@ public class UtenteDAO {
 
 			t.begin();
 			Utente utente = this.getById(idUtente);
-			
+
 			utente.setTessera(tess);
 
 			t.commit();
-			
+			System.out.println("tessera e utente collegati con successo");
 		} catch (Exception ex) {
 			em.getTransaction().rollback();
 			logger.error("Error", ex);
