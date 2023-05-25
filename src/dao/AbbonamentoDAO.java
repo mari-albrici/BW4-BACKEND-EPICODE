@@ -60,10 +60,8 @@ public class AbbonamentoDAO {
 
 	    return query.getResultList();
 	}
-}
-        return query.getResultList();
-    }
-    
+
+     
     public List<Abbonamento> getStoricoAbbonamentiPerNumeroTessera(Long numeroTessera) {
     	EntityManager em = emf.createEntityManager();
         TypedQuery<Abbonamento> query = em.createQuery(
