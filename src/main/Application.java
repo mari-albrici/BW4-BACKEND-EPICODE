@@ -3,7 +3,6 @@ package main;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
-import java.util.UUID;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -375,9 +374,10 @@ public class Application {
 			long tesseraID = input.nextInt();
 			Tessera tessera = td.getById(tesseraID);
 			
-			Abbonamento abbonamento = new Abbonamento(dataEmissione, true, pvendita, periodicità, dataScadenza, tessera );
+			Abbonamento abbonamento = new Abbonamento(dataEmissione, true, pvendita, periodicità, dataScadenza, tessera);
 			System.out.println("Abbonamento creato correttamente: " + abbonamento.toString());
 			break;
+			
 		case 2: 
 			//CHECK VALIDITA' 
 			System.out.println("Inserire ID tessera da cercare: ");
@@ -385,6 +385,7 @@ public class Application {
 			Tessera tesseraC = td.getById(tesseraCercata);
 			tvd.checkValiditaAbbonamento(tesseraC);
 			break;
+			
 		default: 
 			System.out.println("Action not available. Please choose a number between 1 and 2 or type 0 to exit the program.");
 		}

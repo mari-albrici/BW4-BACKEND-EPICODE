@@ -29,26 +29,4 @@ public class BigliettoDAO {
 
     
 }
-//*************PROVA DA INSERIRE NEL MAIN*****
-//public class Main {
-//    public static void main(String[] args) {
-//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("your-persistence-unit-name");
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        BigliettoDAO bigliettoDAO = new BigliettoDAO(entityManager);
-//
-//        
-//        LocalDate dataInizio = LocalDate.of(2023, 1, 1);
-//        LocalDate dataFine = LocalDate.of(2023, 12, 31);
-//
-//       
-//        int numeroBigliettiVidimati = bigliettoDAO.contaBigliettiVidimatiInPeriodo(dataInizio, dataFine);
-//
-//       
-//        System.out.println("Numero di biglietti vidimati nel periodo: " + numeroBigliettiVidimati);
-//
-//        
-//        entityManager.close();
-//        entityManagerFactory.close();
-//    }
-//}
 
