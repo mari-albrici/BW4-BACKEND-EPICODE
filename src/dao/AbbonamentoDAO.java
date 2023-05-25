@@ -34,6 +34,14 @@ public class AbbonamentoDAO {
         query.setParameter("numeroTessera", numeroTessera);
         return query.getResultList();
     }
+    
+    public List<Abbonamento> getStoricoAbbonamentiPerUtente(Long idUtente) {
+        TypedQuery<Abbonamento> query = ((EntityManager) emf).createQuery(
+            "SELECT a FROM Abbonamento a WHERE a.numeroTessera.utenti.id = :idUtente", Abbonamento.class);
+        query.setParameter("idUtente", idUtente);
+        return query.getResultList();
+    }
+
 }
 
 
