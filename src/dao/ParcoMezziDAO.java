@@ -105,4 +105,26 @@ public class ParcoMezziDAO {
 		return risposta;
 	}
 
+	public UUID getTrattaPiuUtilizzata() {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+
+		Query query = em.createQuery(
+				"SELECT p.tratta.id, COUNT(p) as utilizzo FROM ParcoMezzi p GROUP BY p.tratta.id ORDER BY utilizzo DESC");
+		query.setMaxResults(1);
+
+		Object[] result = (Object[]) query.getSingleResult();
+		UUID trattaId = (UUID) result[0];
+		Long numerovoltepercorrenzatratta = (Long) result[1];
+
+		t.commit();
+		em.close();
+
+		System.out.println("Tratta ID: " + trattaId);
+		System.out.println("Numero di volte percorse: " + numerovoltepercorrenzatratta);
+
+		return trattaId;
+	}
+
 }

@@ -19,24 +19,23 @@ import lombok.Setter;
 public class Abbonamento extends TitoliDiViaggio {
 
 	@Enumerated(EnumType.STRING)
-	private Periodicita periodicità;
+	private Periodicita periodicita;
 	private LocalDate dataScadenza;
 
 	@OneToOne
 	private Tessera numeroTessera;
 
-	public Abbonamento(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita, Periodicita periodicità,
+	public Abbonamento(LocalDate dataEmissione, boolean convalidato, PuntiVendita puntoVendita, Periodicita periodicita,
 			LocalDate dataScadenza, Tessera numeroTessera) {
 		super(dataEmissione, convalidato, puntoVendita);
-		this.periodicità = periodicità;
+		this.periodicita = periodicita;
 		this.dataScadenza = dataScadenza;
 		this.numeroTessera = numeroTessera;
 	}
 
 	@Override
 	public String toString() {
-		return "Abbonamento [periodicità=" + periodicità + ", dataScadenza=" + dataScadenza + "]";
+		return "Abbonamento [periodicita�=" + periodicita + ", dataScadenza=" + dataScadenza + "]";
 	}
-	
-	
+
 }
