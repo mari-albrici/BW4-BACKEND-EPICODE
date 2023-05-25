@@ -28,7 +28,7 @@ public class TitoliDiViaggioDAO {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
-		em.persist(b);
+		em.merge(b);
 		transaction.commit();
 		System.out.println("Titolo di viaggio creato!");
 		em.close();
@@ -46,10 +46,9 @@ public class TitoliDiViaggioDAO {
 		transaction.commit();
 		em.close();
 		return results;
-		
+
 	}
-	
-	
+
 	public Biglietto getById(String id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();

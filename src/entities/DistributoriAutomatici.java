@@ -1,6 +1,6 @@
 package entities;
-import javax.persistence.DiscriminatorValue;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DistributoriAutomatici extends PuntiVendita{
+public class DistributoriAutomatici extends PuntiVendita {
 	@Enumerated(EnumType.STRING)
 	private Stato stato;
 
@@ -25,6 +25,7 @@ public class DistributoriAutomatici extends PuntiVendita{
 
 	@Override
 	public String toString() {
-		return "DistributoriAutomatici [stato=" + stato + "]";
+		return "DistributoriAutomatici [id=" + this.getId() + " stato=" + stato + " indirizzo=" + getIndirizzo()
+				+ "numero vendite=" + getNumeroVendite() + "]";
 	}
 }

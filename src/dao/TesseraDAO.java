@@ -1,16 +1,17 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import utils.JPAUtil;
-
 import entities.Tessera;
+import utils.JPAUtil;
 
 public class TesseraDAO {
 
@@ -40,6 +41,18 @@ public class TesseraDAO {
 			em.close();
 		}
 
+	}
+
+	public List<Tessera> getAlltessere() {
+		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Query query = em.createQuery("SELECT t FROM Tessera t");
+		List<Tessera> risposta = query.getResultList();
+		t.commit();
+		em.close();
+		return risposta;
 	}
 
 	public Tessera getById(long id) {
@@ -91,10 +104,5 @@ public class TesseraDAO {
 		}
 
 	}
-
-
-
-
-
 
 }
