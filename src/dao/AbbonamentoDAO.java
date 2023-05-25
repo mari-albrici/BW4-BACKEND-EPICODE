@@ -8,6 +8,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 import entities.Abbonamento;
+import entities.Tessera;
+import entities.enums.Periodicita;
+import entities.Utente;
 
 public class AbbonamentoDAO {
 	private EntityManagerFactory emf;
@@ -25,5 +28,36 @@ public class AbbonamentoDAO {
 		query.setParameter("dataFine", dataFine);
 
 		return query.getResultList();
+	}
+	
+	public List<Abbonamento> getAbbonamentiPerTipo(Periodicita periodicita){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Abbonamento> query = em.createQuery(
+				"SELECT a FROM Abbonamento a WHERE a.periodicita >= :periodicita",
+				Abbonamento.class);
+		query.setParameter("periodicita", periodicita);
+
+		return query.getResultList();
+	}
+	
+	public List<Abbonamento> getAbbonamentiPerUtente(String nome, String cognome) {
+	    EntityManager em = emf.createEntityManager();
+
+	    TypedQuery<Utente> queryOne = em.createQuery(
+	        "SELECT u FROM Utente u WHERE LOWER(u.nome) LIKE LOWER(:nome) AND LOWER(u.cognome) LIKE LOWER(:cognome)", Utente.class);
+	    queryOne.setParameter("nome", "%" + nome + "%");
+	    queryOne.setParameter("cognome", "%" + cognome + "%");
+
+	    Utente utente = queryOne.getSingleResult();
+
+	    TypedQuery<Tessera> queryTwo = em.createQuery("SELECT tessera_utente FROM Utente tessera_utente WHERE id = :id", Tessera.class);
+	    queryTwo.setParameter("id", utente.getTessera().getId());
+
+	    TypedQuery<Abbonamento> query = em.createQuery(
+	        "SELECT a FROM Abbonamento a WHERE a.tessera >= :tessera",
+	        Abbonamento.class);
+	    query.setParameter("tessera", queryTwo.getSingleResult());
+
+	    return query.getResultList();
 	}
 }

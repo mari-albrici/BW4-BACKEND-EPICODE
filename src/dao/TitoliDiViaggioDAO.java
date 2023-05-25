@@ -48,7 +48,7 @@ public class TitoliDiViaggioDAO {
 		return results;
 
 	}
-
+	
 	public Biglietto getById(String id) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();

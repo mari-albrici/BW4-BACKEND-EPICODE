@@ -43,6 +43,7 @@ public class Application {
 	static AbbonamentoDAO ad = new AbbonamentoDAO(emf);
 
 	public static void main(String[] args) {
+		
 
 		// ********** INTERFACCIA - SWITCH **********
 
@@ -498,6 +499,8 @@ public class Application {
 		System.out.println("2. CERCA ABBONAMENTI EMESSI PER PERIODO DI TEMPO");
 		System.out.println("3. CERCA BIGLIETTI VIDIMATI PER PERIODO DI TEMPO");
 		System.out.println("4. COLLEGA UTENTE A TESSERA");
+		System.out.println("5. CERCA ABBONAMENTI PER UTENTE");
+		System.out.println("6. CERCA ABBONAMENTI PER PERIODICITA");
 		System.out.println("0. ESCI");
 		int scelta;
 		scelta = input.nextInt();
@@ -560,6 +563,23 @@ public class Application {
 
 			Tessera selected = td.getById(idTessera);
 			ud.collegaTessera(idUser, selected);
+			break;
+		case 5:
+			System.out.println("Inserire nome utente da ricercare: ");
+			String nome = input.nextLine();
+			System.out.println("Inserire cognome utente da ricercare: ");
+			String cognome = input.nextLine();
+			ad.getAbbonamentiPerUtente(nome, cognome).stream().forEach(abb -> System.out.println(abb));;
+			break;
+		case 6:
+			System.out.println("Selezionare tipo di periodicità: 1 per settimanale, 2 per mensile");
+			int periodicita;
+			periodicita = input.nextInt();
+			if(periodicita == 1) {
+				ad.getAbbonamentiPerTipo(Periodicita.SETTIMANALE).stream().forEach(settimanale -> System.out.println(settimanale));
+			} else if(periodicita == 2) {
+				ad.getAbbonamentiPerTipo(Periodicita.MENSILE).stream().forEach(mensile -> System.out.println(mensile));
+			}
 			break;
 		default:
 			System.out.println(
