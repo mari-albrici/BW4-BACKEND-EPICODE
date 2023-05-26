@@ -27,13 +27,8 @@ import lombok.Setter;
 @Entity
 @Table
 @NoArgsConstructor
-//@NamedQuery(
-//	    name = "ParcoMezzi.findMezzoMoreManutenzione",
-//	    query = "SELECT pm.mezzo " +
-//	            "FROM PeriodoManutenzione pm " +
-//	            "GROUP BY pm.mezzo " +
-//	            "ORDER BY COUNT(pm.mezzo) DESC"
-//	)
+@NamedQuery(name = "ParcoMezzi.findMezzoMoreManutenzione", query = "SELECT pm FROM ParcoMezzi pm "
+		+ "ORDER BY SIZE(pm.periodoManutenzione) DESC ")
 
 public class ParcoMezzi {
 
@@ -48,21 +43,20 @@ public class ParcoMezzi {
 	@OneToMany(mappedBy = "mezzo", fetch = FetchType.EAGER)
 	private Set<PeriodoManutenzione> periodoManutenzione;
 	private int capienza;
-	
+
 	@ManyToOne
 	private Tratta tratta;
-	
+
 	private LocalDateTime orarioDiPartenza;
 	private LocalDateTime orarioDiArrivo;
 	private double tempoImpiegato;
 	private int numeroVoltePercorrenzaTratta;
-	
+
 	@Enumerated(EnumType.STRING)
 	private TipoDiMezzo tipoDiMezzo;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mezzo")
 	private Set<Biglietto> biglietti;
-	
 
 	public ParcoMezzi(stato_parcoMezzi stato, int capienza, Tratta tratta, LocalDateTime orarioDiPartenza,
 			LocalDateTime orarioDiArrivo, double tempoImpiegato, int numeroVoltePercorrenzaTratta,

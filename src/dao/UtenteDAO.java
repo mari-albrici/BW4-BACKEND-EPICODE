@@ -107,7 +107,7 @@ public class UtenteDAO {
 	}
 
 	// ##################################
-	public void collegaTessera(long idUtente, Tessera tess) {
+	public void collegaTessera(Long idUtente, Tessera tess) {
 
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
@@ -120,7 +120,7 @@ public class UtenteDAO {
 			Utente utente = this.getById(idUtente);
 
 			utente.setTessera(tess);
-
+			em.merge(utente);
 			t.commit();
 			System.out.println("tessera e utente collegati con successo");
 		} catch (Exception ex) {

@@ -105,12 +105,12 @@ public class ParcoMezziDAO {
 		em.close();
 		return risposta;
 	}
-	
-	public ParcoMezzi findMezzoMoreManutenzione(){
+
+	public List<ParcoMezzi> findMezzoMoreManutenzione() {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<ParcoMezzi> query = em.createNamedQuery("ParcoMezzi.findMezzoMoreManutenzione", ParcoMezzi.class);
-		query.setMaxResults(1);
-		return query.getSingleResult();
+		// query.setMaxResults(1);
+		return query.getResultList();
 	}
 
 	public UUID getTrattaPiuUtilizzata() {
@@ -134,12 +134,13 @@ public class ParcoMezziDAO {
 
 		return trattaId;
 	}
+
 	public List<ParcoMezzi> getMezziPerTratta(UUID trattaId) {
 		EntityManager em = emf.createEntityManager();
-        String queryStr = "SELECT p FROM ParcoMezzi p WHERE p.tratta.id = :trattaId";
-        Query query = em.createQuery(queryStr, ParcoMezzi.class);
-        query.setParameter("trattaId", trattaId);
-        return query.getResultList();
-    }
+		String queryStr = "SELECT p FROM ParcoMezzi p WHERE p.tratta.id = :trattaId";
+		Query query = em.createQuery(queryStr, ParcoMezzi.class);
+		query.setParameter("trattaId", trattaId);
+		return query.getResultList();
+	}
 
 }
