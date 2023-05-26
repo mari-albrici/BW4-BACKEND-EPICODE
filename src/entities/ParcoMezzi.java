@@ -27,8 +27,8 @@ import lombok.Setter;
 @Entity
 @Table
 @NoArgsConstructor
-@NamedQuery(name = "ParcoMezzi.findMezzoMoreManutenzione", query = "SELECT pm.mezzo FROM PeriodoManutenzione pm "
-		+ "GROUP BY pm.mezzo " + "ORDER BY pm.mezzo DESC")
+@NamedQuery(name = "ParcoMezzi.findMezzoMoreManutenzione", query = "SELECT pm FROM ParcoMezzi pm "
+		+ "ORDER BY SIZE(pm.periodoManutenzione) DESC ")
 
 public class ParcoMezzi {
 

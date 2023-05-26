@@ -106,11 +106,11 @@ public class ParcoMezziDAO {
 		return risposta;
 	}
 
-	public ParcoMezzi findMezzoMoreManutenzione() {
+	public List<ParcoMezzi> findMezzoMoreManutenzione() {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<ParcoMezzi> query = em.createNamedQuery("ParcoMezzi.findMezzoMoreManutenzione", ParcoMezzi.class);
-		query.setMaxResults(1);
-		return query.getSingleResult();
+		// query.setMaxResults(1);
+		return query.getResultList();
 	}
 
 	public UUID getTrattaPiuUtilizzata() {

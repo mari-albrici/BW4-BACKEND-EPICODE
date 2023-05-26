@@ -46,13 +46,13 @@ public class Application {
 	public static void main(String[] args) {
 		// log.info(pvd.findVenditeMax().toString());
 		// log.info(da.distributoriAutomaticiDisattiviOAttivi(Stato.attivo).toString());
-		// log.info(pmd.findMezzoMoreManutenzione().toString());
+		System.out.println(pmd.findMezzoMoreManutenzione().get(0));
 
 		// ********** INTERFACCIA - SWITCH **********
 
-//		ParcoMezzi m1 = pmd.getMezzo("14838272-3628-4123-9f87-0042f9139217");
-//		PeriodoManutenzione p1 = new PeriodoManutenzione(m1, LocalDate.now().minusDays(3),
-//				LocalDate.now().minusDays(2));
+//		ParcoMezzi m1 = pmd.getMezzo("5a0e08e1-af47-4ccf-abea-c6a3c25f7214");
+//		PeriodoManutenzione p1 = new PeriodoManutenzione(m1, LocalDate.now().minusDays(23),
+//				LocalDate.now().minusDays(22));
 //		pmd.savePeriodoManutenzione(p1);
 
 		Scanner input = new Scanner(System.in);
