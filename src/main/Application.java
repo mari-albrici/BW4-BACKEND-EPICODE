@@ -54,7 +54,7 @@ public class Application {
 		int chosenAction = -1;
 
 		while (chosenAction != 0) {
-			log.info("Choose an action: ");
+			log.info("SCEGLIERE UN'AZIONE: ");
 			System.out.println("1. UTENTI E TESSERE");
 			System.out.println("2. TRATTE E MEZZI");
 			System.out.println("3. PUNTI VENDITA");
@@ -93,7 +93,7 @@ public class Application {
 					break;
 				default:
 					System.out.println(
-							"Action not available. Please choose a number between 1 and 2 or type 0 to exit the program.");
+							"AZIONE NON DISPONBILE. SCEGLIERE UN NUMERO TRA 1 E 2 oppure 0 PER CHIUDERE IL PROGRAMMA");
 				}
 				break;
 			case 5:
@@ -106,7 +106,7 @@ public class Application {
 				break;
 			default:
 				System.out.println(
-						"Action not available. Please choose a number between 1 and 5 or type 0 to exit the program.");
+						"AZIONE NON DISPONBILE. SCEGLIERE UN NUMERO TRA 1 E 5 oppure 0 PER CHIUDERE IL PROGRAMMA");
 
 			}
 		}
