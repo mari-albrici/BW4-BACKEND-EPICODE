@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-
+import javax.persistence.TypedQuery;
 
 import entities.ParcoMezzi;
 import entities.PeriodoManutenzione;
@@ -105,8 +105,8 @@ public class ParcoMezziDAO {
 		em.close();
 		return risposta;
 	}
-	
-	public ParcoMezzi findMezzoMoreManutenzione(){
+
+	public ParcoMezzi findMezzoMoreManutenzione() {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<ParcoMezzi> query = em.createNamedQuery("ParcoMezzi.findMezzoMoreManutenzione", ParcoMezzi.class);
 		query.setMaxResults(1);
@@ -134,12 +134,13 @@ public class ParcoMezziDAO {
 
 		return trattaId;
 	}
+
 	public List<ParcoMezzi> getMezziPerTratta(UUID trattaId) {
 		EntityManager em = emf.createEntityManager();
-        String queryStr = "SELECT p FROM ParcoMezzi p WHERE p.tratta.id = :trattaId";
-        Query query = em.createQuery(queryStr, ParcoMezzi.class);
-        query.setParameter("trattaId", trattaId);
-        return query.getResultList();
-    }
+		String queryStr = "SELECT p FROM ParcoMezzi p WHERE p.tratta.id = :trattaId";
+		Query query = em.createQuery(queryStr, ParcoMezzi.class);
+		query.setParameter("trattaId", trattaId);
+		return query.getResultList();
+	}
 
 }

@@ -44,11 +44,16 @@ public class Application {
 	static DistributoriAutomaticiDAO da = new DistributoriAutomaticiDAO(emf);
 
 	public static void main(String[] args) {
-		//log.info(pvd.findVenditeMax().toString());
-		//log.info(da.distributoriAutomaticiDisattiviOAttivi(Stato.attivo).toString());
-		//log.info(pmd.findMezzoMoreManutenzione().toString());
+		// log.info(pvd.findVenditeMax().toString());
+		// log.info(da.distributoriAutomaticiDisattiviOAttivi(Stato.attivo).toString());
+		// log.info(pmd.findMezzoMoreManutenzione().toString());
 
 		// ********** INTERFACCIA - SWITCH **********
+
+//		ParcoMezzi m1 = pmd.getMezzo("14838272-3628-4123-9f87-0042f9139217");
+//		PeriodoManutenzione p1 = new PeriodoManutenzione(m1, LocalDate.now().minusDays(3),
+//				LocalDate.now().minusDays(2));
+//		pmd.savePeriodoManutenzione(p1);
 
 		Scanner input = new Scanner(System.in);
 
@@ -572,15 +577,17 @@ public class Application {
 			String nome = input.nextLine();
 			System.out.println("Inserire cognome utente da ricercare: ");
 			String cognome = input.nextLine();
-			ad.getAbbonamentiPerUtente(nome, cognome).stream().forEach(abb -> System.out.println(abb));;
+			ad.getAbbonamentiPerUtente(nome, cognome).stream().forEach(abb -> System.out.println(abb));
+			;
 			break;
 		case 6:
 			System.out.println("Selezionare tipo di periodicità: 1 per settimanale, 2 per mensile");
 			int periodicita;
 			periodicita = input.nextInt();
-			if(periodicita == 1) {
-				ad.getAbbonamentiPerTipo(Periodicita.SETTIMANALE).stream().forEach(settimanale -> System.out.println(settimanale));
-			} else if(periodicita == 2) {
+			if (periodicita == 1) {
+				ad.getAbbonamentiPerTipo(Periodicita.SETTIMANALE).stream()
+						.forEach(settimanale -> System.out.println(settimanale));
+			} else if (periodicita == 2) {
 				ad.getAbbonamentiPerTipo(Periodicita.MENSILE).stream().forEach(mensile -> System.out.println(mensile));
 			}
 			break;
