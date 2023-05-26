@@ -23,6 +23,8 @@ import entities.Stato;
 import entities.Tessera;
 import entities.Tratta;
 import entities.Utente;
+import entities.PeriodoServizi;
+import entities.PeriodoManutenzione;
 import entities.enums.Periodicita;
 import entities.enums.TipoDiMezzo;
 import entities.enums.stato_parcoMezzi;
@@ -44,16 +46,8 @@ public class Application {
 	static DistributoriAutomaticiDAO da = new DistributoriAutomaticiDAO(emf);
 
 	public static void main(String[] args) {
-		// log.info(pvd.findVenditeMax().toString());
-		// log.info(da.distributoriAutomaticiDisattiviOAttivi(Stato.attivo).toString());
-		System.out.println(pmd.findMezzoMoreManutenzione().get(0));
 
 		// ********** INTERFACCIA - SWITCH **********
-
-//		ParcoMezzi m1 = pmd.getMezzo("5a0e08e1-af47-4ccf-abea-c6a3c25f7214");
-//		PeriodoManutenzione p1 = new PeriodoManutenzione(m1, LocalDate.now().minusDays(23),
-//				LocalDate.now().minusDays(22));
-//		pmd.savePeriodoManutenzione(p1);
 
 		Scanner input = new Scanner(System.in);
 
@@ -72,7 +66,7 @@ public class Application {
 
 			switch (chosenAction) {
 			case 1:
-				log.info("UTENI E TESSERE. Scegliere tra: ");
+				log.info("UTENTI E TESSERE. Scegliere tra: ");
 				gestioneUtentiTessere(input);
 				break;
 			case 2:
@@ -509,6 +503,9 @@ public class Application {
 		System.out.println("4. COLLEGA UTENTE A TESSERA");
 		System.out.println("5. CERCA ABBONAMENTI PER UTENTE");
 		System.out.println("6. CERCA ABBONAMENTI PER PERIODICITA");
+		System.out.println("7. AGGIUNGI PERIODO DI SERVIZIO");
+		System.out.println("8. AGGIUNGI PERIODO DI MANUTENZIONE");
+		System.out.println("9. CERCA MEZZO CON PIU MANUTENZIONE FATTA");
 		System.out.println("0. ESCI");
 		int scelta;
 		scelta = input.nextInt();
@@ -590,6 +587,36 @@ public class Application {
 			} else if (periodicita == 2) {
 				ad.getAbbonamentiPerTipo(Periodicita.MENSILE).stream().forEach(mensile -> System.out.println(mensile));
 			}
+			break;
+		case 7: 
+			System.out.println("Lista mezzi: ");
+            pmd.getAllMezzi().stream().forEach(m -> System.out.println(m));
+			System.out.println("Selezionare mezzo per cui creare il periodo di servizio");
+			String mezzo = input.nextLine();
+			ParcoMezzi mezzoUno = pmd.getMezzo(mezzo);
+			System.out.println("Inserire data inizio periodo di servizio (yyyy/mm/dd)");
+			String dataInizio = input.nextLine();
+			System.out.println("Inserire data fine periodo di servizio (yyyy/mm/dd)");
+			String dataFine = input.nextLine();
+			PeriodoServizi periodo = new PeriodoServizi(mezzoUno, LocalDate.parse(dataInizio), LocalDate.parse(dataFine));
+			pmd.savePeriodoServizio(periodo);
+			break;
+		case 8: 
+			System.out.println("Lista mezzi: ");
+            pmd.getAllMezzi().stream().forEach(m -> System.out.println(m));
+			System.out.println("Selezionare mezzo per cui creare il periodo di manutenzione");
+			String mezzo2 = input.nextLine();
+			ParcoMezzi mezzoDue = pmd.getMezzo(mezzo2);
+			System.out.println("Inserire data inizio periodo di manutenzione (yyyy/mm/dd)");
+			String dataInizioM = input.nextLine();
+			System.out.println("Inserire data fine periodo di manutenzione (yyyy/mm/dd)");
+			String dataFineM = input.nextLine();
+			PeriodoManutenzione periodoDue = new PeriodoManutenzione(mezzoDue, LocalDate.parse(dataInizioM), LocalDate.parse(dataFineM));
+			pmd.savePeriodoManutenzione(periodoDue);
+			break;
+		case 9: 
+			System.out.println("Il mezzo con più manutenzione eseguita è: ");
+			System.out.println(pmd.findMezzoMoreManutenzione().get(0));
 			break;
 		default:
 			System.out.println(
